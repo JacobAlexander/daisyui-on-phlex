@@ -37,9 +37,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "phlex", "~> 1.0"
   spec.add_dependency "phlex-rails", "~> 1.0"
   spec.add_dependency "railties", ">= 6.0"
+  spec.add_dependency "tailwind_merge", "~> 0.12"
 
-  spec.add_development_dependency "rails", ">= 6.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "rails", ">= 8.0"
+  spec.add_development_dependency "rspec", "~> 3.4.4"
   spec.add_development_dependency "rubocop", "~> 1.0"
 
   # For more information and examples about making a new gem, check out our
