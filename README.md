@@ -1,5 +1,7 @@
 # DaisyUI On Phlex
 
+[![Gem Version](https://badge.fury.io/rb/daisyui_on_phlex.svg)](https://badge.fury.io/rb/daisyui_on_phlex)
+
 A Ruby gem that provides [DaisyUI](https://daisyui.com) components as [Phlex](https://phlex.fun) components for Rails applications. This gem makes it easy to use DaisyUI's beautiful components in your Ruby on Rails projects with the power and simplicity of Phlex.
 
 ## Features
