@@ -10,15 +10,15 @@ Gem::Specification.new do |spec|
 
   spec.summary = "DaisyUI components for Phlex - A Ruby gem integrating DaisyUI with Phlex components"
   spec.description = "A Ruby gem that provides DaisyUI components as Phlex components for Rails applications, making it easy to use DaisyUI's beautiful components in your Ruby on Rails projects."
-  spec.homepage = "https://github.com/jacob/daisyui-on-phlex"
+  spec.homepage = "https://github.com/JacobAlexander/daisyui-on-phlex"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
-  spec.metadata["allowed_push_host"] = "https://rubygems.org"
+  spec.metadata["allowed_push_host"] = "https://rubygems.pkg.github.com/JacobAlexander"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/jacob/daisyui-on-phlex"
-  spec.metadata["changelog_uri"] = "https://github.com/jacob/daisyui-on-phlex/blob/main/CHANGELOG.md"
-  spec.metadata["documentation_uri"] = "https://github.com/jacob/daisyui-on-phlex/blob/main/README.md"
+  spec.metadata["source_code_uri"] = "https://github.com/JacobAlexander/daisyui-on-phlex"
+  spec.metadata["changelog_uri"] = "https://github.com/JacobAlexander/daisyui-on-phlex/blob/main/CHANGELOG.md"
+  spec.metadata["documentation_uri"] = "https://github.com/JacobAlexander/daisyui-on-phlex/blob/main/README.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
