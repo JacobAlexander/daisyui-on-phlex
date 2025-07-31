@@ -5,7 +5,7 @@ require_relative "lib/daisyui_on_phlex/version"
 Gem::Specification.new do |spec|
   spec.name = "daisyui_on_phlex"
   spec.version = DaisyuiOnPhlex::VERSION
-  spec.authors = ["Jacob"]
+  spec.authors = ["JacobAlexander"]
   spec.email = ["github@im.jacobalexander.pl"]
 
   spec.summary = "DaisyUI components for Phlex - A Ruby gem integrating DaisyUI with Phlex components"
