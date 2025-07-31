@@ -34,10 +34,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Dependencies
-  spec.add_dependency "phlex", ">= 1.0"
-  spec.add_dependency "phlex-rails", ">= 1.0"
-  spec.add_dependency "railties", "~> 6.0", ">= 6.0"
-  spec.add_dependency "tailwind_merge", ">= 0.12"
+  spec.add_dependency "lucide-rails", "~> 0.5.1"
+  spec.add_dependency "phlex-rails", "~> 2.1"
+  spec.add_dependency "railties", "~> 8.0", ">= 8.0"
+  spec.add_dependency "tailwind_merge", "~> 1.0"
 
   spec.add_development_dependency "rails", "~> 8.0", ">= 8.0"
   spec.add_development_dependency "rspec", "~> 3.0"
