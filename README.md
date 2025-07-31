@@ -164,16 +164,86 @@ render DaisyuiOnPhlex::Components::Input.new(
 
 ## Available Components
 
-Currently implemented components:
+All 61+ DaisyUI components are now implemented as Phlex components:
 
+### Actions
 - **Button** - Interactive buttons with multiple variants and sizes
-- **Alert** - Notification messages with different types
-- **Card** - Content containers with optional borders and layouts
-- **Badge** - Small status indicators and labels
-- **Modal** - Overlay dialogs and modals
-- **Input** - Form input fields with styling variants
+- **Dropdown** - Dropdown menus and popovers
+- **Modal** - Overlay dialogs and modals  
+- **Swap** - Toggle between two states with animations
+- **Theme Controller** - Theme switching controls
 
-More components are being added regularly. Check the [DaisyUI documentation](https://daisyui.com/components/) for the full list of available components.
+### Data Display
+- **Accordion** - Collapsible content sections
+- **Avatar** - User profile images with various styles
+- **Badge** - Small status indicators and labels
+- **Card** - Content containers with optional borders and layouts
+- **Carousel** - Image and content sliders
+- **Chat** - Chat bubble components for messaging interfaces
+- **Collapse** - Collapsible content areas
+- **Countdown** - Animated countdown displays
+- **Kbd** - Keyboard shortcut styling
+- **Stat** - Statistics display blocks
+- **Table** - Data tables with sorting and styling
+- **Timeline** - Chronological event displays
+
+### Data Input
+- **Checkbox** - Checkbox form controls
+- **File Input** - File upload inputs with drag & drop
+- **Input** - Text input fields with styling variants
+- **Radio** - Radio button form controls
+- **Range** - Range slider inputs
+- **Rating** - Star rating components
+- **Select** - Dropdown select inputs
+- **Textarea** - Multi-line text inputs
+- **Toggle** - Toggle switch controls
+
+### Layout
+- **Divider** - Visual content separators
+- **Drawer** - Slide-out navigation panels
+- **Footer** - Page footer sections
+- **Hero** - Hero sections with backgrounds
+- **Indicator** - Corner indicators and badges
+- **Join** - Grouped elements with shared borders
+- **Mask** - Image cropping with various shapes
+- **Stack** - Layered element positioning
+
+### Navigation
+- **Breadcrumbs** - Navigation breadcrumb trails
+- **Dock** - Bottom navigation bars
+- **Link** - Styled hyperlinks
+- **Menu** - Navigation menus and lists
+- **Navbar** - Top navigation bars
+- **Pagination** - Page navigation controls
+- **Steps** - Step-by-step progress indicators
+- **Tab** - Tabbed content interfaces
+
+### Feedback
+- **Alert** - Notification messages with different types
+- **Loading** - Loading spinners and animations
+- **Progress** - Progress bars
+- **Radial Progress** - Circular progress indicators
+- **Skeleton** - Loading state placeholders
+- **Toast** - Temporary notification popups
+- **Tooltip** - Hover information displays
+
+### Mockups
+- **Mockup Browser** - Browser window mockups
+- **Mockup Code** - Code editor mockups
+- **Mockup Phone** - Mobile device mockups
+- **Mockup Window** - Desktop window mockups
+
+### Utilities
+- **Calendar** - Calendar styling support
+- **Diff** - Side-by-side content comparison
+- **Filter** - Filter controls for data
+- **Fieldset** - Form field grouping
+- **Label** - Form field labels
+- **List** - Styled lists and menus
+- **Status** - Status indicators
+- **Validator** - Form validation styling
+
+All components follow DaisyUI's design system and support the full range of variants, sizes, and styling options. Check the [DaisyUI documentation](https://daisyui.com/components/) for detailed usage examples and styling options.
 
 ## Component Options
 
