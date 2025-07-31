@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "tailwind_merge"
 require_relative "daisyui_on_phlex/version"
 require_relative "daisyui_on_phlex/base"
 require_relative "daisyui_on_phlex/railtie" if defined?(Rails)

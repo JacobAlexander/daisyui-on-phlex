@@ -9,6 +9,8 @@ A Ruby gem that provides [DaisyUI](https://daisyui.com) components as [Phlex](ht
 - 🔧 **Customizable**: Full access to DaisyUI's theming and customization options
 - 📦 **Lightweight**: Only includes the components you use
 - 🎯 **Type Safe**: Written with Ruby best practices
+- 🎭 **Theme Support**: 25+ built-in themes with easy switching
+- ♿ **Accessible**: Enhanced accessibility features and ARIA support
 
 ## Installation
 
@@ -29,6 +31,26 @@ Or install it yourself as:
 ```bash
 $ gem install daisyui_on_phlex
 ```
+
+## Quick Setup
+
+After installation, add the CSS import to your `app/assets/stylesheets/application.css`:
+
+```css
+@import "tailwindcss";
+@import "daisyui_on_phlex/stylesheets/daisyui_on_phlex.css";
+```
+
+Make sure your HTML layout supports themes:
+
+```erb
+<!DOCTYPE html>
+<html data-theme="light">
+  <!-- Your app content -->
+</html>
+```
+
+For detailed setup instructions, see [INSTALLATION.md](INSTALLATION.md).
 
 ## Setup
 
