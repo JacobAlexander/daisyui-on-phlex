@@ -38,7 +38,7 @@ module DaisyuiOnPhlex
         
         component_files.each do |component_path|
           component_file_name = File.basename(component_path)
-          # Używamy relatywnej ścieżki względem source_root
+          # We are using relative path from source_root
           relative_path = File.join("components", component_file_name)
           destination_path = Rails.root.join("vendor/daisyui_on_phlex/components", component_file_name)
           
@@ -48,21 +48,40 @@ module DaisyuiOnPhlex
 
       def copy_base_class
         say "Copying base class...", :green
-        # Używamy relatywnej ścieżki względem source_root
+        # We are using relative path from source_root
         copy_file "base.rb", Rails.root.join("vendor/daisyui_on_phlex/base.rb"), force: options["force"]
       end
 
       def create_vendor_initializer
-        vendor_initializer_path = Rails.root.join("config/initializers/daisyui_on_phlex_vendor.rb")
+        vendor_initializer_path = Rails.root.join("config/initializers/daisyui_on_phlex.rb")
         
         create_file vendor_initializer_path, <<~RUBY, force: options["force"]
           # frozen_string_literal: true
 
-          # Load vendor DaisyUI components
-          Rails.autoloaders.main.push_dir(
-            Rails.root.join("vendor/daisyui_on_phlex"), namespace: DaisyuiOnPhlex
-          )
+          module DaisyuiOnPhlex
+            extend Phlex::Kit
+          end
+
+          # Require base.rb first
+          require Rails.root.join("vendor/daisyui_on_phlex/base.rb")
+
+          # Load all DaisyUI components from vendor directory
+          Dir[Rails.root.join("vendor/daisyui_on_phlex/components/*.rb")].each do |file|
+            require file
+          end
+
+          # Configure TailwindMerge for CSS class merging
+          if defined?(TailwindMerge) && defined?(ClassVariants)
+            ClassVariants.configure do |config|
+              merger = TailwindMerge::Merger.new
+              config.process_classes_with do |classes|
+                merger.merge(classes)
+              end
+            end
+          end
         RUBY
+        
+        say "Created vendor initializer: config/initializers/daisyui_on_phlex.rb", :green
       end
 
       def update_tailwind_config
@@ -100,7 +119,12 @@ module DaisyuiOnPhlex
 
         ✅ All #{component_count} components have been copied to vendor/daisyui_on_phlex/
         ✅ DaisyUI plugin configured for Tailwind CSS
+        ✅ Vendor initializer created (config/initializers/daisyui_on_phlex.rb)
         ✅ Ready to use in your Phlex views
+
+        Recommended: Add TailwindMerge for better CSS class handling:
+          gem 'tailwind_merge'
+          gem 'class_variants'
 
         You can now use DaisyUI components in your Phlex views:
 
