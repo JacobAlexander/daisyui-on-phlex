@@ -21,12 +21,34 @@ module DaisyuiOnPhlex
         end
       end
 
+      def install_daisyui_npm
+        if File.exist?("package.json")
+          say "Installing DaisyUI via NPM...", :green
+          
+          # Check if daisyui is already installed
+          package_json = File.read("package.json")
+          unless package_json.include?('"daisyui"')
+            if system("which npm > /dev/null")
+              run "npm install daisyui"
+              say "DaisyUI installed via NPM", :green
+            elsif system("which yarn > /dev/null")
+              run "yarn add daisyui"
+              say "DaisyUI installed via Yarn", :green
+            else
+              say "Neither NPM nor Yarn found. Please install DaisyUI manually: npm install daisyui", :yellow
+            end
+          else
+            say "DaisyUI already installed in package.json", :yellow
+          end
+        else
+          say "No package.json found. Skipping NPM installation.", :yellow
+          say "Please install DaisyUI manually: npm install daisyui", :yellow
+        end
+      end
+
       def copy_daisyui_files
-        say "Installing DaisyUI files...", :green
-        
-        # Download DaisyUI files
-        run "curl -sLo app/assets/tailwind/daisyui.js https://github.com/saadeghi/daisyui/releases/latest/download/daisyui.js" rescue nil
-        run "curl -sLo app/assets/tailwind/daisyui-theme.js https://github.com/saadeghi/daisyui/releases/latest/download/daisyui-theme.js" rescue nil
+        say "DaisyUI assets are now provided automatically via Rails Engine! 🎉", :green
+        say "CSS and JS files are included automatically in your application.", :blue
       end
 
       def copy_components_to_vendor
@@ -85,28 +107,17 @@ module DaisyuiOnPhlex
       end
 
       def update_tailwind_config
-        tailwind_config_path = "app/assets/tailwind/application.css"
-        
-        if File.exist?(tailwind_config_path)
-          say "Updating Tailwind CSS configuration...", :green
-          
-          content = File.read(tailwind_config_path)
-          
-          unless content.include?("@plugin \"./daisyui.js\"")
-            # Add DaisyUI plugin line after @import "tailwindcss"
-            updated_content = content.gsub(
-              /@import "tailwindcss" source\(none\);/,
-              "@import \"tailwindcss\" source(none);\n@plugin \"./daisyui.js\";"
-            )
-            
-            File.write(tailwind_config_path, updated_content)
-            say "Added DaisyUI plugin to Tailwind CSS configuration", :green
-          else
-            say "DaisyUI plugin already configured in Tailwind CSS", :yellow
-          end
-        else
-          say "Tailwind CSS configuration not found. Please add @plugin \"./daisyui.js\"; to your Tailwind CSS configuration manually.", :yellow
-        end
+        say "📝 To include DaisyUI styles in your application:", :green
+        say ""
+        say "1. Add to your main CSS file (application.css or application.tailwind.css):", :yellow
+        say "   //= require daisyui_on_phlex", :cyan
+        say ""
+        say "2. Or in your JavaScript file (application.js):", :yellow
+        say "   //= require daisyui_on_phlex", :cyan
+        say ""
+        say "3. For Tailwind CSS, ensure your tailwind.config.js includes:", :yellow
+        say '   content: ["./vendor/daisyui_on_phlex/**/*.rb"]', :cyan
+        say ""
       end
 
       def show_readme
@@ -118,15 +129,20 @@ module DaisyuiOnPhlex
         DaisyUI On Phlex has been installed! 🎉
 
         ✅ All #{component_count} components have been copied to vendor/daisyui_on_phlex/
-        ✅ DaisyUI plugin configured for Tailwind CSS
+        ✅ DaisyUI CSS & JS automatically provided via Rails Engine
         ✅ Vendor initializer created (config/initializers/daisyui_on_phlex.rb)
         ✅ Ready to use in your Phlex views
 
-        Recommended: Add TailwindMerge for better CSS class handling:
+        📦 Optional: Install DaisyUI via NPM for latest features:
+          npm install daisyui
+          # or
+          yarn add daisyui
+
+        🎨 Recommended gems for better CSS handling:
           gem 'tailwind_merge'
           gem 'class_variants'
 
-        You can now use DaisyUI components in your Phlex views:
+        🚀 You can now use DaisyUI components in your Phlex views:
 
           # In your Phlex view
           class MyView < Phlex::HTML
@@ -141,16 +157,15 @@ module DaisyuiOnPhlex
             end
           end
 
-        All 61+ components are now available:
+        🎯 All 61+ components are now available:
         - Button, Alert, Card, Badge, Modal, Input
         - Navigation: Navbar, Menu, Breadcrumbs, Tabs
         - Data Display: Table, Stat, Timeline, Avatar
         - Forms: Checkbox, Radio, Select, Toggle
         - And many more...
 
-        Components are in vendor/daisyui_on_phlex/components/ and can be customized.
-
-        For documentation: https://github.com/jacob/daisyui-on-phlex
+        📁 Components are in vendor/daisyui_on_phlex/components/ and can be customized.
+        📚 For documentation: https://github.com/jacob/daisyui-on-phlex
 
         TEXT
       end
