@@ -19,7 +19,7 @@ module DaisyuiOnPhlex
         div(class: merge_classes("navbar-center", attributes[:class]), **attributes.except(:class), &block)
       end
 
-      def end(**attributes, &block)
+      def navbar_end(**attributes, &block)
         div(class: merge_classes("navbar-end", attributes[:class]), **attributes.except(:class), &block)
       end
     end

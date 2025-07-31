@@ -3,8 +3,8 @@
 module DaisyuiOnPhlex
   module Components
     class Collapse < DaisyuiOnPhlex::Base
-      def initialize(open: false, arrow: false, plus: false, **attributes)
-        @open = open
+      def initialize(expanded: false, arrow: false, plus: false, **attributes)
+        @expanded = expanded
         @arrow = arrow
         @plus = plus
         @attributes = attributes
@@ -16,10 +16,10 @@ module DaisyuiOnPhlex
             "collapse",
             ("collapse-arrow" if @arrow),
             ("collapse-plus" if @plus),
-            ("collapse-open" if @open),
+            ("collapse-open" if @expanded),
             @attributes[:class]
           ),
-          open: @open,
+          open: @expanded,
           **@attributes.except(:class),
           &block
         )

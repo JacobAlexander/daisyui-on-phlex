@@ -25,7 +25,7 @@ module DaisyuiOnPhlex
         end
       end
 
-      def link(href:, text, active: false, **attributes, &block)
+      def link(href:, text:, active: false, **attributes, &block)
         a(
           href: href,
           class: pagination_button_classes(active: active),

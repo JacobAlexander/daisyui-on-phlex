@@ -3,8 +3,8 @@
 module DaisyuiOnPhlex
   module Components
     class Drawer < DaisyuiOnPhlex::Base
-      def initialize(end: false, **attributes)
-        @end = end
+      def initialize(side: :start, **attributes)
+        @side = side  # :start or :end
         @attributes = attributes
       end
 
@@ -41,7 +41,7 @@ module DaisyuiOnPhlex
 
       def drawer_side_classes
         classes = ["drawer-side"]
-        classes << "drawer-end" if @end
+        classes << "drawer-end" if @side == :end
         merge_classes(*classes)
       end
     end

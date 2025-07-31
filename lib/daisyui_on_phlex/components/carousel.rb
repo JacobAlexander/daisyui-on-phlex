@@ -3,9 +3,8 @@
 module DaisyuiOnPhlex
   module Components
     class Carousel < DaisyuiOnPhlex::Base
-      def initialize(center: false, end: false, vertical: false, **attributes)
-        @center = center
-        @end = end
+      def initialize(alignment: nil, vertical: false, **attributes)
+        @alignment = alignment # :center, :end, nil for default (start)
         @vertical = vertical
         @attributes = attributes
       end
@@ -27,8 +26,8 @@ module DaisyuiOnPhlex
 
       def carousel_classes
         classes = ["carousel"]
-        classes << "carousel-center" if @center
-        classes << "carousel-end" if @end
+        classes << "carousel-center" if @alignment == :center
+        classes << "carousel-end" if @alignment == :end
         classes << "carousel-vertical" if @vertical
         merge_classes(*classes)
       end

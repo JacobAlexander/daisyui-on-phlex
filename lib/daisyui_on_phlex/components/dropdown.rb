@@ -5,19 +5,15 @@ module DaisyuiOnPhlex
     class Dropdown < DaisyuiOnPhlex::Base
       def initialize(
         position: :bottom,
-        align: :left,
-        end: false,
-        top: false,
+        align: :start,
         hover: false,
-        open: false,
+        force_open: false,
         **attributes
       )
         @position = position
         @align = align
-        @end = end
-        @top = top
         @hover = hover
-        @open = open
+        @force_open = force_open
         @attributes = attributes
       end
 
@@ -50,9 +46,12 @@ module DaisyuiOnPhlex
         when :right then classes << "dropdown-right"
         end
 
-        classes << "dropdown-end" if @end
+        case @align
+        when :end then classes << "dropdown-end"
+        end
+
         classes << "dropdown-hover" if @hover
-        classes << "dropdown-open" if @open
+        classes << "dropdown-open" if @force_open
 
         merge_classes(*classes)
       end

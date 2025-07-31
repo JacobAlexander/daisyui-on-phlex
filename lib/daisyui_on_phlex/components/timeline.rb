@@ -14,8 +14,8 @@ module DaisyuiOnPhlex
         ul(class: timeline_classes, **@attributes, &block)
       end
 
-      def item(start: false, end: false, **attributes, &block)
-        li(class: item_classes(start: start, end: end), **attributes, &block)
+      def item(timeline_start: false, timeline_end: false, **attributes, &block)
+        li(class: item_classes(timeline_start: timeline_start, timeline_end: timeline_end), **attributes, &block)
       end
 
       def start(**attributes, &block)
@@ -26,7 +26,7 @@ module DaisyuiOnPhlex
         div(class: "timeline-middle", **attributes, &block)
       end
 
-      def end(**attributes, &block)
+      def timeline_end(**attributes, &block)
         div(class: "timeline-end", **attributes, &block)
       end
 
@@ -41,10 +41,10 @@ module DaisyuiOnPhlex
         merge_classes(*classes)
       end
 
-      def item_classes(start: false, end: false)
+      def item_classes(timeline_start: false, timeline_end: false)
         classes = []
-        classes << "timeline-start" if start
-        classes << "timeline-end" if end
+        classes << "timeline-start" if timeline_start
+        classes << "timeline-end" if timeline_end
         merge_classes(*classes)
       end
     end

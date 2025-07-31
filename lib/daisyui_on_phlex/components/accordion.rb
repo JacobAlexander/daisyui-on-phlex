@@ -16,16 +16,15 @@ module DaisyuiOnPhlex
         )
       end
 
-      def item(open: false, **attributes)
-        div(class: merge_classes("collapse", ("collapse-open" if open)), **attributes) do
-          yield AccordionItem.new
+      def item(expanded: false, **attributes, &block)
+        div(class: merge_classes("collapse", ("collapse-open" if expanded)), **attributes) do
+          yield AccordionItem.new if block_given?
         end
       end
 
       private
 
-      class AccordionItem
-        include Phlex::HTML
+      class AccordionItem < DaisyuiOnPhlex::Base
 
         def title(**attributes, &block)
           div(class: "collapse-title text-xl font-medium", **attributes, &block)

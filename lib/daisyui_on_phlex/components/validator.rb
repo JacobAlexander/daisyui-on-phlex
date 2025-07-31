@@ -4,12 +4,10 @@ module DaisyuiOnPhlex
   module Components
     class Validator < DaisyuiOnPhlex::Base
       def initialize(
-        valid: nil,
-        invalid: nil,
+        state: nil, # :valid, :invalid, nil for neutral
         **attributes
       )
-        @valid = valid
-        @invalid = invalid
+        @state = state
         @attributes = attributes
       end
 
@@ -22,10 +20,9 @@ module DaisyuiOnPhlex
       def validator_classes
         classes = []
         
-        if @valid == true
-          classes << "input-success"
-        elsif @valid == false || @invalid == true
-          classes << "input-error"
+        case @state
+        when :valid then classes << "input-success"
+        when :invalid then classes << "input-error"
         end
 
         merge_classes(*classes)

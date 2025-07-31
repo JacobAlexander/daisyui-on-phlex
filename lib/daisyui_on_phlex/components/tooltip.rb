@@ -7,20 +7,20 @@ module DaisyuiOnPhlex
         text:,
         position: :top,
         variant: nil,
-        open: false,
+        force_open: false,
         **attributes
       )
         @text = text
         @position = position
         @variant = variant
-        @open = open
+        @force_open = force_open
         @attributes = attributes
       end
 
       def view_template(&block)
         div(
           class: tooltip_classes,
-          data: { tip: @text },
+          "data-tip": @text,
           **@attributes,
           &block
         )
@@ -48,7 +48,7 @@ module DaisyuiOnPhlex
         when :error then classes << "tooltip-error"
         end
 
-        classes << "tooltip-open" if @open
+        classes << "tooltip-open" if @force_open
 
         merge_classes(*classes)
       end

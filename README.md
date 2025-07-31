@@ -34,40 +34,94 @@ Or install it yourself as:
 $ gem install daisyui_on_phlex
 ```
 
-## Quick Setup
-
-After installation, add the CSS import to your `app/assets/stylesheets/application.css`:
-
-```css
-@import "tailwindcss";
-@import "daisyui_on_phlex/stylesheets/daisyui_on_phlex.css";
-```
-
-Make sure your HTML layout supports themes:
-
-```erb
-<!DOCTYPE html>
-<html data-theme="light">
-  <!-- Your app content -->
-</html>
-```
-
-For detailed setup instructions, see [INSTALLATION.md](INSTALLATION.md).
-
 ## Setup
 
-Run the install generator to set up DaisyUI in your Rails application:
+Run the install generator to set up DaisyUI components in your Rails application:
 
 ```bash
 $ rails generate daisyui_on_phlex:install
 ```
 
 This will:
-1. Download the latest DaisyUI JavaScript files
-2. Configure your Tailwind CSS to include the DaisyUI plugin
-3. Provide usage instructions
+1. **Copy all 61+ components** to `vendor/daisyui_on_phlex/components/` in your Rails app
+2. **Configure autoloader** to serve components from vendor directory instead of gem
+3. Install **phlex-rails** dependency if not already present
+4. Download the latest **DaisyUI JavaScript files**
+5. Configure your **Tailwind CSS** to include the DaisyUI plugin
+6. Add CSS imports to your application
+7. Provide usage instructions
+
+### Why Copy to Vendor?
+
+Unlike traditional gems that load components from memory, DaisyUI On Phlex follows the **shadcn-ui approach** by copying components directly to your application. This gives you:
+
+- ✅ **Full ownership** of component code in your app
+- ✅ **Easy customization** - edit components locally
+- ✅ **No gem dependencies** for component logic after installation
+- ✅ **Version control** your component modifications
+- ✅ **Better debugging** with direct access to source code
+
+After installation, all components will be available from `vendor/daisyui_on_phlex/components/` and you can modify them as needed for your project.
+
+### Manual Configuration (Optional)
+
+If you prefer manual setup or need to customize the installation:
+
+#### 1. Configure your HTML layout
+
+Make sure your HTML layout supports theme switching by adding the `data-theme` attribute:
+
+```erb
+<!DOCTYPE html>
+<html data-theme="light">
+  <head>
+    <!-- Your head content -->
+  </head>
+  <body>
+    <!-- Your body content -->
+  </body>
+</html>
+```
+
+#### 2. Theme Configuration
+
+The CSS file includes the most popular DaisyUI themes by default:
+- `light` (default), `dark` (prefers dark mode)
+- `cupcake`, `dracula`, `emerald`, `corporate`, `synthwave`, `retro`, `cyberpunk`
+- `valentine`, `halloween`, `garden`, `forest`, `aqua`, `lofi`, `pastel`
+- `fantasy`, `wireframe`, `black`, `luxury`, `autumn`, `business`
+- `acid`, `lemonade`, `night`, `coffee`, `winter`, `dim`, `nord`, `sunset`
+
+#### 3. Theme Switching
+
+To enable theme switching, you can use the `data-theme` attribute:
+
+```erb
+<select data-choose-theme>
+  <option value="light">Light</option>
+  <option value="dark">Dark</option>
+  <option value="cupcake">Cupcake</option>
+  <option value="dracula">Dracula</option>
+  <!-- Add more themes as needed -->
+</select>
+```
+
+For automatic theme switching, consider using the [theme-change](https://github.com/saadeghi/theme-change) library:
+
+```bash
+npm install theme-change
+```
+
+Then initialize it in your JavaScript:
+
+```javascript
+import { themeChange } from 'theme-change'
+themeChange()
+```
 
 ## Usage
+
+After running the install generator, all DaisyUI components will be copied to your `vendor/daisyui_on_phlex/components/` directory and automatically available in your application.
 
 Use DaisyUI components in your Phlex views:
 
@@ -164,7 +218,7 @@ render DaisyuiOnPhlex::Components::Input.new(
 
 ## Available Components
 
-All 61+ DaisyUI components are now implemented as Phlex components:
+After installation, all 61+ DaisyUI components are copied to your `vendor/daisyui_on_phlex/components/` directory and ready to use. You can customize any component by editing the files directly in your vendor folder.
 
 ### Actions
 - **Button** - Interactive buttons with multiple variants and sizes
@@ -244,6 +298,83 @@ All 61+ DaisyUI components are now implemented as Phlex components:
 - **Validator** - Form validation styling
 
 All components follow DaisyUI's design system and support the full range of variants, sizes, and styling options. Check the [DaisyUI documentation](https://daisyui.com/components/) for detailed usage examples and styling options.
+
+## Customization
+
+Since all components are copied to your `vendor/daisyui_on_phlex/components/` directory, you have full control over their implementation:
+
+### Modifying Components
+
+```bash
+# All components are in your vendor directory
+ls vendor/daisyui_on_phlex/components/
+
+# Edit any component directly
+code vendor/daisyui_on_phlex/components/button.rb
+```
+
+### Creating Custom Variants
+
+```ruby
+# In vendor/daisyui_on_phlex/components/button.rb
+module DaisyuiOnPhlex
+  module Components  
+    class Button < DaisyuiOnPhlex::Base
+      def initialize(variant: :primary, custom_style: nil, **attributes)
+        @variant = variant
+        @custom_style = custom_style
+        @attributes = attributes
+      end
+
+      private
+
+      def component_classes
+        classes = ["btn"]
+        classes << "btn-#{@variant}" if @variant
+        classes << @custom_style if @custom_style  # Your custom styles
+        classes.join(" ")
+      end
+    end
+  end
+end
+```
+
+All changes will be preserved in your application and tracked in your version control system.
+
+### Vendor Directory Structure
+
+After installation, your vendor directory will contain:
+
+```
+vendor/daisyui_on_phlex/
+├── base.rb                    # Base class for all components
+└── components/
+    ├── accordion.rb
+    ├── alert.rb
+    ├── avatar.rb
+    ├── badge.rb
+    ├── button.rb
+    ├── card.rb
+    ├── ...                    # All 61+ components
+    └── tooltip.rb
+```
+
+### Troubleshooting
+
+If you encounter issues:
+
+1. **Generator fails**: Ensure you're in a Rails application directory and have proper permissions
+2. **Components not found**: Check that `config/initializers/daisyui_on_phlex_vendor.rb` was created
+3. **Styles not loading**: Ensure the CSS import is after `@import "tailwindcss";`
+4. **Themes not working**: Check that your HTML has the `data-theme` attribute
+5. **Build errors**: Make sure you have Tailwind CSS properly configured in your Rails app
+6. **Vendor directory issues**: Verify components were copied to `vendor/daisyui_on_phlex/components/`
+
+You can safely re-run the generator to update components or fix configuration:
+
+```bash
+rails generate daisyui_on_phlex:install
+```
 
 ## Component Options
 

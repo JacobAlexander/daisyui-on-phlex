@@ -5,11 +5,11 @@ module DaisyuiOnPhlex
     class Modal < DaisyuiOnPhlex::Base
       def initialize(
         id:,
-        open: false,
+        visible: false,
         **attributes
       )
         @id = id
-        @open = open
+        @visible = visible
         @attributes = attributes
       end
 
@@ -19,7 +19,7 @@ module DaisyuiOnPhlex
           type: "checkbox",
           id: @id,
           class: "modal-toggle",
-          checked: @open
+          checked: @visible
         )
 
         # Modal
